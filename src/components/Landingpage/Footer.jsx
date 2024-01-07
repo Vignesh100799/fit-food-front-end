@@ -5,6 +5,7 @@ import {
   faTwitter,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -16,50 +17,50 @@ const Footer = () => {
 
         <a
           href="#"
-          className="text-center text-decoration-none col-xl-6 col-sm-12"
+          className="text-center text-decoration-none col-xl-6 col-sm-12 text-black"
         >
           Home
         </a>
-        <a
+        <Link
           href="#"
-          className="text-center text-decoration-none col-xl-6 col-sm-12"
+          className="text-center text-decoration-none col-xl-6 col-sm-12 text-black"
         >
           About Us
-        </a>
+        </Link>
 
         <div className="text-center">
-          <a
+          <Link
             href="#"
-            className="text-center text-decoration-none col-xl-4 col-sm-12"
+            className="text-center text-decoration-none col-xl-4 col-sm-12 text-black"
           >
             Contact
-          </a>
+          </Link>
         </div>
         <div className="text-center justify-content-around">
-          <a
+          <Link
             href="#"
             target="_blank"
             rel="noopener noreferrer"
             className="text-center text-decoration-none m-3"
           >
             <FontAwesomeIcon icon={faFacebook} />
-          </a>
-          <a
+          </Link>
+          <Link
             href="#"
             target="_blank"
             rel="noopener noreferrer"
             className="text-center text-decoration-none m-3"
           >
             <FontAwesomeIcon icon={faTwitter} />
-          </a>
-          <a
+          </Link>
+          <Link
             href="#"
             target="_blank"
             
             className="text-center text-decoration-none m-3"
           >
             <FontAwesomeIcon icon={faInstagram} />
-          </a>
+          </Link>
         </div>
 
         <div className="footer-bottom text-center py-2">

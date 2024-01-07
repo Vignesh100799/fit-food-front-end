@@ -23,8 +23,7 @@ const Login = () => {
         .required("Password is required"),
     }),
     onSubmit: (values) => {
-      
-      console.log(values)
+      console.log(values);
       formik.resetForm();
     },
   });
@@ -52,7 +51,9 @@ const Login = () => {
             style={formContainerStyle}
             className=""
           >
-            <h2 className="text-center mb-4">Fit Food</h2>
+            <Link to={"/"} className="text-decoration-none text-black">
+              <h1 className="text-center mb-4">Fit Food</h1>
+            </Link>
 
             <div className="mb-3">
               <label htmlFor="email" className="form-label">
@@ -98,7 +99,9 @@ const Login = () => {
             </button>
             <p className="mt-3 text-center">
               Not yet registered?
-              <Link to="/register" className="ms-2">Register here</Link>
+              <Link to="/register" className="ms-2">
+                Register here
+              </Link>
             </p>
           </form>
         </div>

@@ -76,7 +76,9 @@ const Register = () => {
               style={formContainerStyle}
               className="m-4"
             >
-              <h2 className="text-center mb-4">Fit Food</h2>
+               <Link to={"/"} className="text-decoration-none text-black">
+              <h1 className="text-center mb-4">Fit Food</h1>
+            </Link>
 
               <div className="mb-3">
                 <label htmlFor="firstName" className="form-label">
