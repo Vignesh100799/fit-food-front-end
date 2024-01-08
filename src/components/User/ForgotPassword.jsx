@@ -1,34 +1,25 @@
 import { useFormik } from "formik";
 import React from "react";
 import * as Yup from "yup";
-import { containerStyle, formContainerStyle } from "./style";
 
+import { containerStyle, formContainerStyle } from "./style";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const ForgotPassword = () => {
   const formik = useFormik({
     initialValues: {
       email: "",
-      password: "",
     },
     validationSchema: Yup.object({
       email: Yup.string()
         .email("Invalid email address")
         .required("Email is required"),
-      password: Yup.string()
-        .min(8, "Password must be at least 8 characters")
-        .matches(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
-          "Password must include at least one uppercase letter, one lowercase letter, one digit, and one special character"
-        )
-        .required("Password is required"),
     }),
     onSubmit: (values) => {
-      console.log(values);
+      console.log("Sending reset link to:", values.email);
       formik.resetForm();
     },
   });
-
   return (
     <div className="container-fluid" style={containerStyle}>
       <div className="row align-items-center justify-content-center vh-100">
@@ -61,37 +52,15 @@ const Login = () => {
                 <div className="invalid-feedback">{formik.errors.email}</div>
               ) : null}
             </div>
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Password
-              </label>
-              <input
-                type="password"
-                className={`form-control ${
-                  formik.touched.password && formik.errors.password
-                    ? "is-invalid"
-                    : ""
-                }`}
-                id="password"
-                name="password"
-                {...formik.getFieldProps("password")}
-              />
-              {formik.touched.password && formik.errors.password ? (
-                <div className="invalid-feedback">{formik.errors.password}</div>
-              ) : null}
-            </div>
 
             <button type="submit" className="btn btn-primary w-100 mt-3">
-              Login
+              Send Reset Link
             </button>
             <p className="mt-3 text-center">
-              Not yet registered?
-              <Link to="/register"  className="text-decoration-none ms-2">
-                Register here
+              Remember your password?{" "}
+              <Link to="/login" className="text-decoration-none ms-2">
+                Login here
               </Link>
-            </p>
-            <p className="mt-3 text-center">
-              <Link to="/forgot-password" className="text-decoration-none">Forgot Password?</Link>
             </p>
           </form>
         </div>
@@ -100,4 +69,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;
