@@ -1,0 +1,46 @@
+
+.light-mode {
+    --background-color: #ffffff;
+    --text-color: #000000;
+  }
+  
+  /* Dark mode styles */
+  .dark-mode {
+    --background-color: #000000;
+    --text-color: #ffffff;
+  }
+  
+  /* Shared styles */
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .nav-item {
+    margin-right: 10px;
+  }
+  
+  .btn-link {
+    color: var(--text-color);
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+  
+  .btn-link:focus {
+    outline: none;
+  }
+  
+  /* Apply the color variables to the background */
+  .light-mode {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  
+  .dark-mode {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  
