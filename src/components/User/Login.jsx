@@ -3,9 +3,10 @@ import React from "react";
 import * as Yup from "yup";
 import { containerStyle, formContainerStyle } from "./style";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate()
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -26,6 +27,7 @@ const Login = () => {
     onSubmit: (values) => {
       console.log(values);
       formik.resetForm();
+      navigate('/dashboard')
     },
   });
 
