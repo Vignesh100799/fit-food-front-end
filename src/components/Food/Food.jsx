@@ -25,7 +25,7 @@ const Food = () => {
             >
               {Object.keys(gainWeightTips).map((day) => (
                 <option key={day} value={day}>
-                  {day.charAt(0).toUpperCase() + day.slice(1)}
+                  {day}
                 </option>
               ))}
             </select>
@@ -40,7 +40,7 @@ const Food = () => {
             <ul className="list-group">
               {gainWeightTips[selectedDay]["breakfast"].map((food, index) => (
                 <li key={index} className="list-group-item">
-                  {food}
+                  {food}.
                 </li>
               ))}
             </ul>
@@ -50,7 +50,7 @@ const Food = () => {
             <ul className="list-group">
               {gainWeightTips[selectedDay]["lunch"].map((food, index) => (
                 <li key={index} className="list-group-item">
-                  {food}
+                  {food}.
                 </li>
               ))}
             </ul>
@@ -60,7 +60,7 @@ const Food = () => {
             <ul className="list-group">
               {gainWeightTips[selectedDay]["snack"].map((food, index) => (
                 <li key={index} className="list-group-item">
-                  {food}
+                  {food}.
                 </li>
               ))}
             </ul>
@@ -70,7 +70,7 @@ const Food = () => {
             <ul className="list-group">
               {gainWeightTips[selectedDay]["dinner"].map((food, index) => (
                 <li key={index} className="list-group-item">
-                  {food}
+                  {food}.
                 </li>
               ))}
             </ul>

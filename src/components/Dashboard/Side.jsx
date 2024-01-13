@@ -1,6 +1,7 @@
 import {
   faCalculator,
   faChartSimple,
+  faDumbbell,
   faMessage,
   faMoon,
   faPersonCircleQuestion,
@@ -13,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Children, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./nav.css";
+import Welcome from "./Welcome";
 
 const Side = ({ children }) => {
   const [isSidebarActive, setSidebarActive] = useState(true);
@@ -25,7 +27,7 @@ const Side = ({ children }) => {
  
   return (
     <div className="wrapper d-flex align-items-stretch light-mode">
-      <nav id="sidebar" className={isSidebarActive ? "active" : ""}>
+      <nav id="sidebar" className={isSidebarActive ? "active " : ""}>
         <Link to={"/"}>
           <h3 className="text-white mt-3 text-center">Fit Food</h3>
         </Link>
@@ -42,6 +44,14 @@ const Side = ({ children }) => {
                 <FontAwesomeIcon icon={faChartSimple} />
               </span>
               Food Chart
+            </Link>
+          </li>
+          <li>
+            <Link to={"/exercise"} className="text-decoration-none mt-3">
+              <span>
+                <FontAwesomeIcon icon={faDumbbell} />
+              </span>
+              Exercise
             </Link>
           </li>
           <li>
@@ -107,6 +117,9 @@ const Side = ({ children }) => {
               id="navbarSupportedContent"
             >
               <ul className="nav navbar-nav ml-auto">
+                <li className="nav-item">
+                  <Welcome/>
+                </li>
                 <li className="nav-item active">
                   <a className="nav-link text-primary" href="#">
                     <FontAwesomeIcon icon={faUser} className="mr-1" />

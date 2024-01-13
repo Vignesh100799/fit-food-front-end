@@ -4,30 +4,17 @@ import * as Yup from "yup";
 import { containerStyle, formContainerStyle } from "./style";
 
 import { Link, useNavigate } from "react-router-dom";
+import { loginInitialValue, loginValidation } from "../Formik/formik";
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validationSchema: Yup.object({
-      email: Yup.string()
-        .email("Invalid email address")
-        .required("Email is required"),
-      password: Yup.string()
-        .min(8, "Password must be at least 8 characters")
-        .matches(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
-          "Password must include at least one uppercase letter, one lowercase letter, one digit, and one special character"
-        )
-        .required("Password is required"),
-    }),
+    initialValues: loginInitialValue,
+    validationSchema: loginValidation,
     onSubmit: (values) => {
       console.log(values);
       formik.resetForm();
-      navigate('/dashboard')
+      navigate("/dashboard");
     },
   });
 
@@ -57,7 +44,8 @@ const Login = () => {
                 }`}
                 id="email"
                 name="email"
-                {...formik.getFieldProps("email")}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
               {formik.touched.email && formik.errors.email ? (
                 <div className="invalid-feedback">{formik.errors.email}</div>
@@ -76,7 +64,8 @@ const Login = () => {
                 }`}
                 id="password"
                 name="password"
-                {...formik.getFieldProps("password")}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
               {formik.touched.password && formik.errors.password ? (
                 <div className="invalid-feedback">{formik.errors.password}</div>
@@ -88,12 +77,14 @@ const Login = () => {
             </button>
             <p className="mt-3 text-center">
               Not yet registered?
-              <Link to="/register"  className="text-decoration-none ms-2">
+              <Link to="/register" className="text-decoration-none ms-2">
                 Register here
               </Link>
             </p>
             <p className="mt-3 text-center">
-              <Link to="/forgot-password" className="text-decoration-none">Forgot Password?</Link>
+              <Link to="/forgot-password" className="text-decoration-none">
+                Forgot Password?
+              </Link>
             </p>
           </form>
         </div>

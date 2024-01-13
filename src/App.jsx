@@ -16,6 +16,7 @@ import Food from "./components/Food/Food";
 import BmiCalculator from "./components/Dashboard/Bmi";
 import Faq from "./components/Dashboard/Faq";
 import Contact from "./components/Dashboard/Contact";
+import HomeExercise from "./components/Exercise/HomeExercise";
 
 function App() {
   return (
@@ -33,6 +34,8 @@ function App() {
           <Route path="/bmi-calculator" element={<BmiCalculator />} />
           <Route path="/faq-section" element={<Faq />} />
           <Route path="/contact-us" element={<Contact/>}/>
+          <Route path="/exercise" element={<HomeExercise/>}/>
+
         </Routes>
       </BrowserRouter>
     </>

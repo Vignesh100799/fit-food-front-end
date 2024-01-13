@@ -11,7 +11,7 @@ const Contact = () => {
         </p>
         <div>
           <h4>Email:</h4>
-          <p>info@dietsuggestionapp.com</p>
+          <p>info@fitfoodapp.com</p>
         </div>
         <div>
           <h4>Phone:</h4>

@@ -12,7 +12,7 @@ const Faq = () => {
       <div className="container mt-4">
         <h2>Frequently Asked Questions</h2>
         {faqData.map((faq, index) => (
-          <div key={index} className="mb-3">
+          <div key={index} className="mb-3 ">
             <div
               className={`accordion accordion-flush faq-question ${
                 expandedIndex === index ? "expanded" : ""
@@ -20,9 +20,9 @@ const Faq = () => {
               onClick={() => handleToggle(index)}
             >
               <div className="accordion-item">
-                <h2 className="accordion-header" id={`faqHeading${index}`}>
+                <h2 className="accordion-header " id={`faqHeading${index}`}>
                   <button
-                    className="accordion-button collapsed"
+                    className="accordion-button collapsed text-bg-light"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target={`#faqCollapse${index}`}
