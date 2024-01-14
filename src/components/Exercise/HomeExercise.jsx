@@ -3,7 +3,7 @@ import Side from "../Dashboard/Side";
 import { exercise } from "./exercise";
 const HomeExercise = () => {
   const [selectedDay, setSelectedDay] = useState(Object.keys(exercise)[0]);
-  console.log(Object.keys(exercise));
+  
   const handleDayChange = (event) => {
     setSelectedDay(event.target.value);
   };

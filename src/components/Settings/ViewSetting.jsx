@@ -41,8 +41,8 @@ const ViewSetting = ({ onEditClick }) => {
               <td>Certain Cancers</td>
             </tr>
             <tr>
-              <td>Height</td>
-              <td>165cm</td>
+            <td>Health Condition</td>
+              <td>Certain Cancers</td>
             </tr>
           </tbody>
         </table>
