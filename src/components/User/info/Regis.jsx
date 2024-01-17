@@ -15,6 +15,8 @@ import { initialValues, validationSchema } from "../../Formik/formik";
 import Step3 from "./Steps/Step3";
 import Step1 from "./Steps/Step1";
 import Step2 from "./Steps/Step2";
+import axios from "axios";
+
 
 const RegisterForm = () => {
   const steps = [
@@ -24,34 +26,34 @@ const RegisterForm = () => {
   ];
   const [activeStep, setActiveStep] = useState(0);
   const [showThankYou, setShowThankYou] = useState(false);
-  
+
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: (value) => {
-     
-      formik.resetForm();
-      setShowThankYou(true);
+    onSubmit: async (value) => {
+      try {
+        await axios.post(`/api/register`, value);
+        console.log(value)
+        formik.resetForm();
+        setShowThankYou(true);
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
-  
 
   const getStepContent = (stepIndex) => {
     switch (stepIndex) {
       case 2:
         return (
           <>
-          <Step3 formik={formik}/>
+            <Step3 formik={formik} />
           </>
         );
       case 0:
-        return (
-          <Step1 formik={formik}/>
-        );
+        return <Step1 formik={formik} />;
       case 1:
-        return (
-          <Step2 formik={formik}/>
-        );
+        return <Step2 formik={formik} />;
       default:
         return null;
     }
