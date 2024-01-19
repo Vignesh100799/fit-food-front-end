@@ -7,7 +7,7 @@ export default defineConfig({
   server : {
     proxy : {
       '/api' : {
-        target : 'http://localhost:6505'
+        target : 'https://fit-food.onrender.com'
       }
     }
   }
