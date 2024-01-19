@@ -23,6 +23,7 @@ const Step2 = ({ formik }) => {
     kidneyDisease: ["Chronic Kidney Disease (CKD)"],
     respiratoryConditions: ["Sleep Apnea"],
     mentalHealthConditions: ["Depression"],
+    None : ["None"]
   });
   const handleHealthConditionCategoryChange = (category) => {
     formik.setFieldValue("healthConditionCategory", category);
@@ -59,6 +60,28 @@ const Step2 = ({ formik }) => {
             )}
           </div>
           <div>
+            <label htmlFor="food" className="form-label">
+              Food Type:
+            </label>
+            <select
+              id="food"
+              name="food"
+              className={`form-select ${
+                formik.touched.food && formik.errors.food ? "is-invalid" : ""
+              }`}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.food}
+            >
+              <option value="" label="Select a Food" />
+              <option value="veg" label="Vegetarian" />
+              <option value="nonVeg" label="Non Vegetarian" />
+            </select>
+            {formik.touched.food && formik.errors.food && (
+              <div className="invalid-feedback">{formik.errors.food}</div>
+            )}
+          </div>
+          <div>
             <label htmlFor="weight.value" className="form-label">
               Weight:
             </label>
@@ -76,100 +99,44 @@ const Step2 = ({ formik }) => {
                 onBlur={formik.handleBlur}
                 value={formik.values.weight.value}
               />
-              <span className="input-group-text">
-                <select
-                  id="weight.unit"
-                  name="weight.unit"
-                  className={`form-select ${
-                    formik.touched.weight?.unit && formik.errors.weight?.unit
-                      ? "is-invalid"
-                      : ""
-                  }`}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.weight.unit}
-                >
-                  <option value="kg" label="kg" />
-                  <option value="lbs" label="lbs" />
-                </select>
-              </span>
+              <span className="input-group-text">kg</span>
             </div>
             {formik.touched.weight?.value && formik.errors.weight?.value && (
               <div className="invalid-feedback">
                 {formik.errors.weight.value}
               </div>
             )}
-            {formik.touched.weight?.unit && formik.errors.weight?.unit && (
-              <div className="invalid-feedback">
-                {formik.errors.weight.unit}
-              </div>
-            )}
           </div>
 
           <div>
-            <label htmlFor="height.feet" className="form-label">
+            <label htmlFor="height.value" className="form-label">
               Height:
             </label>
             <div className="input-group">
               <input
                 type="number"
-                id="height.feet"
-                name="height.feet"
+                id="height.value"
+                name="height.value"
                 className={`form-control ${
-                  formik.touched.height?.feet && formik.errors.height?.feet
+                  formik.touched.height?.value && formik.errors.height?.value
                     ? "is-invalid"
                     : ""
                 }`}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.height.feet}
+                value={formik.values.height.value}
               />
-              <span className="input-group-text">ft</span>
+              <span className="input-group-text">cm</span>
             </div>
-            <div className="input-group mt-2">
-              <input
-                type="number"
-                id="height.inches"
-                name="height.inches"
-                className={`form-control ${
-                  formik.touched.height?.inches && formik.errors.height?.inches
-                    ? "is-invalid"
-                    : ""
-                }`}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.height.inches}
-              />
-              <span className="input-group-text">in</span>
-            </div>
-            <select
-              id="height.unit"
-              name="height.unit"
-              className={`form-select mt-2 ${
-                formik.touched.height?.unit && formik.errors.height?.unit
-                  ? "is-invalid"
-                  : ""
-              }`}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.height.unit}
-            >
-              <option value="ft" label="ft" />
-              <option value="cm" label="cm" />
-            </select>
-            {(formik.touched.height?.feet ||
-              formik.touched.height?.inches ||
-              formik.touched.height?.unit) &&
-              (formik.errors.height?.feet ||
-                formik.errors.height?.inches ||
-                formik.errors.height?.unit) && (
-                <div className="invalid-feedback">
-                  {formik.errors.height?.feet ||
-                    formik.errors.height?.inches ||
-                    formik.errors.height?.unit}
-                </div>
-              )}
+            {formik.touched.height?.value && formik.errors.height?.value && (
+              <div className="invalid-feedback">
+                <span className="d-inline-block">
+                  {formik.errors.height.value}
+                </span>
+              </div>
+            )}
           </div>
+
           <div>
             <label htmlFor="healthConditionCategory" className="form-label">
               Health Condition Category:

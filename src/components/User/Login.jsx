@@ -1,20 +1,33 @@
-import { useFormik } from "formik";
-import React from "react";
-import * as Yup from "yup";
+import { ErrorMessage, useFormik } from "formik";
+import React, { useState } from "react";
+
 import { containerStyle, formContainerStyle } from "./style";
 
 import { Link, useNavigate } from "react-router-dom";
 import { loginInitialValue, loginValidation } from "../Formik/formik";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { loginSuccess } from "../reducers/Slice/userSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
+  const [apiError, setApiError] = useState(null);
   const formik = useFormik({
     initialValues: loginInitialValue,
     validationSchema: loginValidation,
-    onSubmit: (values) => {
-      console.log(values);
-      formik.resetForm();
-      navigate("/dashboard");
+    onSubmit: async (values) => {
+      try {
+        const response = await axios.post(`/api/login`, values);
+        if (response.status === 200) {
+          dispatch(loginSuccess(response.data));
+          formik.resetForm();
+          navigate("/dashboard");
+        }
+      } catch (error) {
+        setApiError(error.response.data.message);
+      }
     },
   });
 
@@ -70,6 +83,11 @@ const Login = () => {
               {formik.touched.password && formik.errors.password ? (
                 <div className="invalid-feedback">{formik.errors.password}</div>
               ) : null}
+              {apiError && (
+                <p className="alert alert-danger mt-3 text-center" role="alert">
+                  {apiError}
+                </p>
+              )}
             </div>
 
             <button type="submit" className="btn btn-primary w-100 mt-3">

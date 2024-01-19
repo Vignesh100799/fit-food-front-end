@@ -1,16 +1,51 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { settingsIntialvalues, settingsValidation } from "../Formik/formik";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../reducers/state";
+import axios from "axios";
+import { updateSuccess } from "../reducers/Slice/userSlice";
 
+const EditSetting = ({ onCancelEdit, setEditing }) => {
+  const { currentUser } = useSelector(selectUser);
+  const dispatch = useDispatch();
+  const user = currentUser;
 
-const EditSetting = ({ onCancelEdit }) => {
   const formik = useFormik({
-    initialValues: settingsIntialvalues,
+    initialValues: {
+      username: user.username || "",
+      goals: user.goals || "",
+      food: user.food || "",
+      gender: user.gender || "",
+      age: user.age || "",
+      activationLevel: user.activationLevel || "",
+      weight: {
+        value: user.weight[0].value || "",
+        unit: "kg",
+      },
+
+      height: {
+        value: user.height[0].value || "",
+        unit: "cm",
+      },
+      healthConditionCategory: user.healthConditionCategory || "",
+      healthCondition: user.healthCondition || "",
+    },
     validationSchema: settingsValidation,
-    onSubmit: (values, { resetForm }) => {
-      console.log('Submitting form with values:', values);
-      resetForm();
-      onCancelEdit();
+    onSubmit: async (values) => {
+      try {
+        console.log(values);
+        const response = await axios.patch(
+          `/api/updateSetting/${user._id}`,
+          values
+        );
+        console.log(response);
+        dispatch(updateSuccess(response.data));
+        setEditing(false);
+        onCancelEdit();
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
   const [healthConditions, setHealthConditions] = useState({
@@ -45,7 +80,6 @@ const EditSetting = ({ onCancelEdit }) => {
       <div className="row">
         <form onSubmit={formik.handleSubmit} className="w-100">
           <table className="table">
-            <thead></thead>
             <tbody>
               <tr>
                 <td>User Name</td>
@@ -92,6 +126,30 @@ const EditSetting = ({ onCancelEdit }) => {
                     <div className="invalid-feedback">
                       {formik.errors.gender}
                     </div>
+                  )}
+                </td>
+              </tr>
+              <tr>
+                <td>Food Type</td>
+                <td>
+                  <select
+                    id="food"
+                    name="food"
+                    className={`form-select ${
+                      formik.touched.food && formik.errors.food
+                        ? "is-invalid"
+                        : ""
+                    }`}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.food}
+                  >
+                    <option value="" label="Select a Food" />
+                    <option value="veg" label="Vegetarian" />
+                    <option value="nonVeg" label="Non Vegetarian" />
+                  </select>
+                  {formik.touched.food && formik.errors.food && (
+                    <div className="invalid-feedback">{formik.errors.food}</div>
                   )}
                 </td>
               </tr>
@@ -182,33 +240,11 @@ const EditSetting = ({ onCancelEdit }) => {
                     onBlur={formik.handleBlur}
                     value={formik.values.weight.value}
                   />
-
-                  <select
-                    id="weight.unit"
-                    name="weight.unit"
-                    className={`form-select ${
-                      formik.touched.weight?.unit && formik.errors.weight?.unit
-                        ? "is-invalid"
-                        : ""
-                    }`}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.weight.unit}
-                  >
-                    <option value="kg" label="kg" />
-                    <option value="lbs" label="lbs" />
-                  </select>
-
+                  <span className="input-group-text">kg</span>
                   {formik.touched.weight?.value &&
                     formik.errors.weight?.value && (
                       <div className="invalid-feedback">
                         {formik.errors.weight.value}
-                      </div>
-                    )}
-                  {formik.touched.weight?.unit &&
-                    formik.errors.weight?.unit && (
-                      <div className="invalid-feedback">
-                        {formik.errors.weight.unit}
                       </div>
                     )}
                 </td>
@@ -218,43 +254,25 @@ const EditSetting = ({ onCancelEdit }) => {
                 <td>
                   <input
                     type="number"
-                    id="height.feet"
-                    name="height.feet"
+                    id="height.value"
+                    name="height.value"
                     className={`form-control ${
-                      formik.touched.height?.feet && formik.errors.height?.feet
+                      formik.touched.height?.value &&
+                      formik.errors.height?.value
                         ? "is-invalid"
                         : ""
                     }`}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.height.feet}
+                    value={formik.values.height.value}
                   />
-
-                  <select
-                    id="height.unit"
-                    name="height.unit"
-                    className={`form-select mt-2 ${
-                      formik.touched.height?.unit && formik.errors.height?.unit
-                        ? "is-invalid"
-                        : ""
-                    }`}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.height.unit}
-                  >
-                    <option value="ft" label="ft" />
-                    <option value="cm" label="cm" />
-                  </select>
-                  {(formik.touched.height?.feet ||
-                    formik.touched.height?.inches ||
-                    formik.touched.height?.unit) &&
-                    (formik.errors.height?.feet ||
-                      formik.errors.height?.inches ||
-                      formik.errors.height?.unit) && (
+                  <span className="input-group-text">cm</span>
+                  {formik.touched.height?.value &&
+                    formik.errors.height?.value && (
                       <div className="invalid-feedback">
-                        {formik.errors.height?.feet ||
-                          formik.errors.height?.inches ||
-                          formik.errors.height?.unit}
+                        <span className="d-inline-block">
+                          {formik.errors.height.value}
+                        </span>
                       </div>
                     )}
                 </td>

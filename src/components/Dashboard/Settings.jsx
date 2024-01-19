@@ -5,9 +5,13 @@ import { initialValues, validationSchema } from "../Formik/formik";
 import Side from "./Side";
 import EditSetting from "../Settings/EditSetting";
 import ViewSetting from "../Settings/ViewSetting";
+import { useSelector } from "react-redux";
+import { selectUser } from "../reducers/state";
 
 const Settings = () => {
   const [isEditing, setEditing] = useState(false);
+
+  
   const handleEditClick = () => {
     setEditing(true);
   };
@@ -19,7 +23,7 @@ const Settings = () => {
   return (
     <Side>
       {isEditing ? (
-        <EditSetting onCancelEdit={handleCancelEdit} />
+        <EditSetting setEditing={setEditing} onCancelEdit={handleCancelEdit} />
       ) : (
         <ViewSetting onEditClick={handleEditClick} />
       )}

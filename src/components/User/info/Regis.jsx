@@ -33,7 +33,7 @@ const RegisterForm = () => {
     onSubmit: async (value) => {
       try {
         await axios.post(`/api/register`, value);
-        console.log(value)
+        // console.log(value)
         formik.resetForm();
         setShowThankYou(true);
       } catch (error) {

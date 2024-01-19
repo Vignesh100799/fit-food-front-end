@@ -1,5 +1,9 @@
 
+import { useSelector } from "react-redux";
 import * as Yup from "yup";
+import { selectUser } from "../reducers/state";
+
+
 
 export const loginInitialValue = {
     email: "",
@@ -36,9 +40,11 @@ export const settingsIntialvalues = {
     healthConditionCategory: "",
     healthCondition: "",
 }
-export const settingsValidation =  Yup.object( {
+export const settingsValidation = Yup.object({
     username: Yup.string().required("Required"),
     goals: Yup.string().required("Please select a goal"),
+    food : Yup.string().required("Select Food Type"),
+
     gender: Yup.string().required("Select a gender"),
     age: Yup.number()
         .required("Age is required")
@@ -53,18 +59,16 @@ export const settingsValidation =  Yup.object( {
                 then: Yup.number().min(88, "Weight must be at least 88 lbs"),
             }),
         unit: Yup.string()
-            .required("Unit is required")
-            .oneOf(["kg", "lbs"], "Invalid unit"),
+            .required("Unit is required"),
     }),
-
     height: Yup.object().shape({
-        feet: Yup.number().required("Feet is required"),
-        inches: Yup.number()
-            .required("Inches is required")
-            .min(0, "Inches must be greater than or equal to 0"),
+        value: Yup.number()
+            .required("Height is required")
+            .min(54.6, "Height must be greater than or equal to the world's lowest person (54.6 cm)")
+            .max(272, "Height must be less than or equal to the world's highest person (272 cm)"),
         unit: Yup.string()
             .required("Unit is required")
-            .oneOf(["ft", "cm"], "Invalid unit"),
+            .oneOf(["cm"], "Invalid unit"),
     }),
     healthConditionCategory: Yup.string().required(
         "Health condition category is required"
@@ -80,6 +84,7 @@ export const initialValues = {
     confirmPassword: "",
     username: "",
     goals: "",
+    food : "",
     gender: "",
     age: "",
     activationLevel: "",
@@ -88,9 +93,8 @@ export const initialValues = {
         unit: "kg",
     },
     height: {
-        feet: "",
-        inches: "",
-        unit: "ft",
+        value: "",
+        unit: "cm",
     },
     healthConditionCategory: "",
     healthCondition: "",
@@ -123,6 +127,7 @@ export const validationSchema = Yup.object({
         .required("Confirm Password is required"),
     username: Yup.string().required("Required"),
     goals: Yup.string().required("Please select a goal"),
+    food : Yup.string().required("Select Food Type"),
     gender: Yup.string().required("Select a gender"),
     age: Yup.number()
         .required("Age is required")
@@ -137,18 +142,16 @@ export const validationSchema = Yup.object({
                 then: Yup.number().min(88, "Weight must be at least 88 lbs"),
             }),
         unit: Yup.string()
-            .required("Unit is required")
-            .oneOf(["kg", "lbs"], "Invalid unit"),
+            .required("Unit is required"),
     }),
-
     height: Yup.object().shape({
-        feet: Yup.number().required("Feet is required"),
-        inches: Yup.number()
-            .required("Inches is required")
-            .min(0, "Inches must be greater than or equal to 0"),
+        value: Yup.number()
+            .required("Height is required")
+            .min(54.6, "Height must be greater than or equal to the world's lowest person (54.6 cm)")
+            .max(272, "Height must be less than or equal to the world's highest person (272 cm)"),
         unit: Yup.string()
             .required("Unit is required")
-            .oneOf(["ft", "cm"], "Invalid unit"),
+            .oneOf(["cm"], "Invalid unit"),
     }),
     healthConditionCategory: Yup.string().required(
         "Health condition category is required"

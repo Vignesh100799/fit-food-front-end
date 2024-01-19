@@ -15,20 +15,29 @@ import React, { Children, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./nav.css";
 import Welcome from "./Welcome";
+import { useDispatch } from "react-redux";
+import { logOutSuccess } from "../reducers/Slice/userSlice";
 
 const Side = ({ children }) => {
   const [isSidebarActive, setSidebarActive] = useState(true);
-  
+  const dispatch = useDispatch()
 
   
   const toggleSidebar = () => {
     setSidebarActive(!isSidebarActive);
   };
+  const handleLogout = async ()=>{
+try {
+  dispatch(logOutSuccess())
+} catch (error) {
+  
+}
+  }
  
   return (
     <div className="wrapper d-flex align-items-stretch light-mode">
       <nav id="sidebar" className={isSidebarActive ? "active " : ""}>
-        <Link to={"/"}>
+        <Link >
           <h3 className="text-white mt-3 text-center">Fit Food</h3>
         </Link>
         <ul className="list-unstyled components mb-5">
@@ -112,25 +121,28 @@ const Side = ({ children }) => {
             >
               <i className="fa fa-bars" />
             </button>
+            
             <div
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
             >
+             
               <ul className="nav navbar-nav ml-auto">
+                
                 <li className="nav-item">
                   <Welcome/>
                 </li>
                 <li className="nav-item active">
-                  <a className="nav-link text-primary" href="#">
+                  <Link to={"/settings"} className="nav-link text-primary">
                     <FontAwesomeIcon icon={faUser} className="mr-1" />
                     Profile
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-primary" href="#">
+                  <Link to={"/"} onClick={handleLogout} className="nav-link text-primary">
                     <FontAwesomeIcon icon={faSignOutAlt} className="mr-1" />
                     Logout
-                  </a>
+                  </Link>
                 </li>
                 
               </ul>

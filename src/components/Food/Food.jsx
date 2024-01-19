@@ -1,20 +1,36 @@
 import React, { useState } from "react";
 import Side from "../Dashboard/Side";
-import { tips } from "./fooditem";
+import { nonVegTips, vegTips } from "./fooditem";
+import Breakfast from "./Breakfast";
+import Lunch from "./Lunch";
+import Snack from "./Snack";
+import Dinner from "./Dinner";
+import { useSelector } from "react-redux";
+import { selectUser } from "../reducers/state";
 const Food = () => {
-  const gainWeightTips = tips.gainWeight;
+  const { currentUser } = useSelector(selectUser);
+  const nonVeg = nonVegTips;
+  const veg = vegTips;
+  const goals = currentUser.goals;
+  let gainWeightTips;
+  if (currentUser.food === "veg") {
+    gainWeightTips = veg[goals];
+  } else {
+    gainWeightTips = nonVeg[goals];
+  }
   const [selectedDay, setSelectedDay] = useState(
     Object.keys(gainWeightTips)[0]
   );
 
   const handleDayChange = (event) => {
     setSelectedDay(event.target.value);
+    console.log(currentUser);
   };
   return (
     <Side>
       <div className="container">
         <div className="row">
-          <h2 className="mt-4 mb-3">Gain Weight Tips</h2>
+          <h2 className="mt-4 mb-3">{goals} Tips</h2>
           <div className="form-group col-md-4">
             <label htmlFor="daySelect">Select Day:</label>
             <select
@@ -35,46 +51,13 @@ const Food = () => {
           <h3 className="mt-4 col-md-12">
             {selectedDay.charAt(0).toUpperCase() + selectedDay.slice(1)}
           </h3>
-          <div className="col-md-6">
-            <h4 className="mt-3">Breakfast</h4>
-            <ul className="list-group">
-              {gainWeightTips[selectedDay]["breakfast"].map((food, index) => (
-                <li key={index} className="list-group-item">
-                  {food}.
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="col-md-6">
-            <h4 className="mt-3">Lunch</h4>
-            <ul className="list-group">
-              {gainWeightTips[selectedDay]["lunch"].map((food, index) => (
-                <li key={index} className="list-group-item">
-                  {food}.
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="col-md-6">
-            <h4 className="mt-3">Snack</h4>
-            <ul className="list-group">
-              {gainWeightTips[selectedDay]["snack"].map((food, index) => (
-                <li key={index} className="list-group-item">
-                  {food}.
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="col-md-6">
-            <h4 className="mt-3">Dinner</h4>
-            <ul className="list-group">
-              {gainWeightTips[selectedDay]["dinner"].map((food, index) => (
-                <li key={index} className="list-group-item">
-                  {food}.
-                </li>
-              ))}
-            </ul>
-          </div>
+          <Breakfast
+            gainWeightTips={gainWeightTips}
+            selectedDay={selectedDay}
+          />
+          <Lunch gainWeightTips={gainWeightTips} selectedDay={selectedDay} />
+          <Snack gainWeightTips={gainWeightTips} selectedDay={selectedDay} />
+          <Dinner gainWeightTips={gainWeightTips} selectedDay={selectedDay} />
         </div>
       </div>
     </Side>

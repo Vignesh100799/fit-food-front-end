@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../reducers/state';
 
 const BmiChart = () => {
+  const {currentUser} = useSelector(selectUser)
+  const weight = currentUser.weight[0].value
+  const height = currentUser.height[0].value
+  // console.log(height)
   const [bmi, setBmi] = useState(null);
 
   useEffect(() => {
-
-    const randomBmi = Math.random() * (30 - 15) + 15;
-    setBmi(randomBmi.toFixed(2));
+    const heightInMeter = height/100
+    const bmi = weight /Math.pow(heightInMeter,2)
+    setBmi(bmi.toFixed(2));
   }, []);
 
   const getBmiCategory = () => {

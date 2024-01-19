@@ -1,11 +1,14 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 
 import { containerStyle, formContainerStyle } from "./style";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const ForgotPassword = () => {
+  const [apiError, setApiError] = useState(null);
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -15,9 +18,15 @@ const ForgotPassword = () => {
         .email("Invalid email address")
         .required("Email is required"),
     }),
-    onSubmit: (values) => {
-      console.log("Sending reset link to:", values.email);
-      formik.resetForm();
+    onSubmit: async (values) => {
+      try {
+        // console.log("Sending reset link to:", values.email);
+    const response = await axios.post(`/api/forgot-password`, values);
+        formik.resetForm();
+        console.log(response)
+      } catch (error) {
+        setApiError(error.response.data.message);
+      }
     },
   });
   return (
@@ -51,6 +60,11 @@ const ForgotPassword = () => {
               {formik.touched.email && formik.errors.email ? (
                 <div className="invalid-feedback">{formik.errors.email}</div>
               ) : null}
+              {apiError && (
+                <p className="alert alert-danger mt-3 text-center" role="alert">
+                  {apiError}
+                </p>
+              )}
             </div>
 
             <button type="submit" className="btn btn-primary w-100 mt-3">

@@ -17,6 +17,7 @@ import BmiCalculator from "./components/Dashboard/Bmi";
 import Faq from "./components/Dashboard/Faq";
 import Contact from "./components/Dashboard/Contact";
 import HomeExercise from "./components/Exercise/HomeExercise";
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
 
 function App() {
   return (
@@ -27,15 +28,16 @@ function App() {
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/food-chart" element={<Food />} />
-          <Route path="/bmi-calculator" element={<BmiCalculator />} />
-          <Route path="/faq-section" element={<Faq />} />
-          <Route path="/contact-us" element={<Contact/>}/>
-          <Route path="/exercise" element={<HomeExercise/>}/>
-
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/food-chart" element={<Food />} />
+            <Route path="/bmi-calculator" element={<BmiCalculator />} />
+            <Route path="/faq-section" element={<Faq />} />
+            <Route path="/contact-us" element={<Contact />} />
+            <Route path="/exercise" element={<HomeExercise />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>

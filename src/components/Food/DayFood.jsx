@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import { tips } from "./fooditem";
+import { nonVegTips, vegTips } from "./fooditem";
+import { selectUser } from "../reducers/state";
+import { useSelector } from "react-redux";
 
 const AutoSelectDay = ({ onSelect }) => {
   const daysOfWeek = [
@@ -22,7 +24,17 @@ const AutoSelectDay = ({ onSelect }) => {
 };
 
 const DayFood = () => {
-  const gainWeightTips = tips.gainWeight;
+  const nonVeg = nonVegTips;
+  const veg = vegTips;
+  const { currentUser } = useSelector(selectUser);
+  const goals = currentUser.goals;
+  let gainWeightTips;
+  if (currentUser.food === "veg") {
+    gainWeightTips = veg[goals];
+  } else {
+    gainWeightTips = nonVeg[goals];
+  }
+
   const [selectedDay, setSelectedDay] = useState(
     Object.keys(gainWeightTips)[0]
   );
