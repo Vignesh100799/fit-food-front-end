@@ -114,8 +114,8 @@ const Side = ({ children }) => {
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              {/* <i className="fa fa-bars" /> */}
-              <span className="navbar-toggler-icon"></span>
+              <i className="fa fa-bars m-2" />
+              {/* <span className="navbar-toggler-icon"></span> */}
             </button>
 
             <div
