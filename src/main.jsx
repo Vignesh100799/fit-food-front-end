@@ -5,8 +5,9 @@ import "./index.css";
 import { Provider } from "react-redux";
 import { persistor, store } from "./components/store.js";
 import { PersistGate } from "redux-persist/integration/react";
+import axios from "axios";
 
-// store.dispatch(fetchMeal())
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <PersistGate persistor={persistor} loading={null}>
