@@ -94,7 +94,7 @@ const Side = ({ children }) => {
       </nav>
       {/* Page Content  */}
       <div id="content" className="m-2">
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className="navbar navbar-expand-lg bg-body-dark">
           <div className="container-fluid">
             <button
               type="button"
@@ -122,7 +122,7 @@ const Side = ({ children }) => {
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
             >
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                   <Welcome />
                 </li>
