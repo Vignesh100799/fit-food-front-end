@@ -7,7 +7,6 @@ import { persistor, store } from "./components/store.js";
 import { PersistGate } from "redux-persist/integration/react";
 import axios from "axios";
 import '../sidebar-07/js/main.js'
-import '../sidebar-07/js/popper.js'
 // store.dispatch(fetchMeal())
 axios.defaults.baseURL = "https://fit-food.onrender.com"
 // axios.defaults.baseURL = '/api';
