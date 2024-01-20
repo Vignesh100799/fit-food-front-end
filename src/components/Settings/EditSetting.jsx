@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../reducers/state";
 import axios from "axios";
 import { updateSuccess } from "../reducers/Slice/userSlice";
+import { healthConditions } from "../Food/health";
 
 const EditSetting = ({ onCancelEdit, setEditing }) => {
   const { currentUser } = useSelector(selectUser);
@@ -48,29 +49,8 @@ const EditSetting = ({ onCancelEdit, setEditing }) => {
       }
     },
   });
-  const [healthConditions, setHealthConditions] = useState({
-    obesityRelated: [
-      "Type 2 Diabetes",
-      "Cardiovascular Diseases",
-      "Hypertension",
-    ],
-    nutrientDeficiencyRelated: [
-      "Iron Deficiency Anemia",
-      "Vitamin D Deficiency",
-    ],
-    eatingDisorders: ["Anorexia Nervosa", "Bulimia Nervosa"],
-    gastrointestinalDisorders: [
-      "GERD",
-      "Nonalcoholic Fatty Liver Disease (NAFLD)",
-    ],
-    cancer: ["Certain Cancers"],
-    jointDisorders: ["Osteoarthritis"],
-    metabolicSyndrome: ["Metabolic Syndrome"],
-    kidneyDisease: ["Chronic Kidney Disease (CKD)"],
-    respiratoryConditions: ["Sleep Apnea"],
-    mentalHealthConditions: ["Depression"],
-    None : ["None"]
-  });
+  
+
   const handleHealthConditionCategoryChange = (category) => {
     formik.setFieldValue("healthConditionCategory", category);
     formik.setFieldValue("healthCondition", "");
