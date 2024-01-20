@@ -8,7 +8,7 @@ import 'bootstrap';
 import ForgotPassword from "./components/User/ForgotPassword";
 import ResetPassword from "./components/User/ResetPassword";
 import RegisterForm from "./components/User/info/Regis";
-import '../sidebar-07/js/bootstrap.min.js'
+
 import Dashboard from "./components/Dashboard/Dashboard";
 import Settings from "./components/Dashboard/Settings";
 import Food from "./components/Food/Food";
