@@ -94,7 +94,7 @@ const Side = ({ children }) => {
       </nav>
       {/* Page Content  */}
       <div id="content" className="m-2">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary">
           <div className="container-fluid">
             <button
               type="button"
@@ -106,22 +106,23 @@ const Side = ({ children }) => {
               <span className="sr-only">Toggle Menu</span>
             </button>
             <button
-              className="btn btn-dark d-inline-block d-lg-none ml-auto"
+              className="navbar-toggler"
               type="button"
-              data-toggle="collapse"
-              data-target="#navbarSupportedContent"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <i className="fa fa-bars" />
+              {/* <i className="fa fa-bars" /> */}
+              <span class="navbar-toggler-icon"></span>
             </button>
 
             <div
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
             >
-              <ul className="nav navbar-nav ml-auto">
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
                   <Welcome />
                 </li>
