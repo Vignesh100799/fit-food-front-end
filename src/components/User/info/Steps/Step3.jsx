@@ -1,3 +1,5 @@
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -76,6 +78,7 @@ const Step3 = ({ formik }) => {
             <label htmlFor="password" className="form-label">
               Password
             </label>
+            <div className="input-group">
             <input
               type={showpassword ? "text" : "password"}
               className={`form-control ${
@@ -87,7 +90,17 @@ const Step3 = ({ formik }) => {
               name="password"
               {...formik.getFieldProps("password")}
             />
-            <button onClick={handleShow}>show</button>
+            <button
+              className="btn btn-outline-secondary"
+              type="button"
+              onClick={handleShow}
+            >
+              {" "}
+              <FontAwesomeIcon
+                icon={showpassword ? faEyeSlash : faEye}
+                size="sm"
+              />
+            </button></div>
             {formik.touched.password && formik.errors.password ? (
               <div className="invalid-feedback">{formik.errors.password}</div>
             ) : null}
@@ -96,8 +109,9 @@ const Step3 = ({ formik }) => {
             <label htmlFor="confirmPassword" className="form-label">
               Confirm Password
             </label>
+            <div className="input-group">
             <input
-              type="password"
+              type={showpassword ? "text" : "password"}
               className={`form-control ${
                 formik.touched.confirmPassword && formik.errors.confirmPassword
                   ? "is-invalid"
@@ -107,6 +121,19 @@ const Step3 = ({ formik }) => {
               name="confirmPassword"
               {...formik.getFieldProps("confirmPassword")}
             />
+             <button
+              className="btn btn-outline-secondary"
+              type="button"
+              onClick={handleShow}
+            >
+              {" "}
+              <FontAwesomeIcon
+                icon={showpassword ? faEyeSlash : faEye}
+                size="sm"
+              />
+            </button>
+
+            </div>
             {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
               <div className="invalid-feedback">
                 {formik.errors.confirmPassword}

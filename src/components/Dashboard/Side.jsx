@@ -3,15 +3,13 @@ import {
   faChartSimple,
   faDumbbell,
   faMessage,
-  faMoon,
   faPersonCircleQuestion,
   faSignOutAlt,
   faSliders,
-  faSun,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { Children, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./nav.css";
 import Welcome from "./Welcome";
@@ -20,24 +18,21 @@ import { logOutSuccess } from "../reducers/Slice/userSlice";
 
 const Side = ({ children }) => {
   const [isSidebarActive, setSidebarActive] = useState(true);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  
   const toggleSidebar = () => {
     setSidebarActive(!isSidebarActive);
   };
-  const handleLogout = async ()=>{
-try {
-  dispatch(logOutSuccess())
-} catch (error) {
-  
-}
-  }
- 
+  const handleLogout = async () => {
+    try {
+      dispatch(logOutSuccess());
+    } catch (error) {}
+  };
+
   return (
     <div className="wrapper d-flex align-items-stretch light-mode">
       <nav id="sidebar" className={isSidebarActive ? "active " : ""}>
-        <Link >
+        <Link>
           <h3 className="text-white mt-3 text-center">Fit Food</h3>
         </Link>
         <ul className="list-unstyled components mb-5">
@@ -90,7 +85,7 @@ try {
           <li>
             <Link to={"/faq-section"} className="text-decoration-none">
               <span>
-              <FontAwesomeIcon icon={faPersonCircleQuestion} />
+                <FontAwesomeIcon icon={faPersonCircleQuestion} />
               </span>
               FAQ
             </Link>
@@ -121,16 +116,14 @@ try {
             >
               <i className="fa fa-bars" />
             </button>
-            
+
             <div
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
             >
-             
               <ul className="nav navbar-nav ml-auto">
-                
                 <li className="nav-item">
-                  <Welcome/>
+                  <Welcome />
                 </li>
                 <li className="nav-item active">
                   <Link to={"/settings"} className="nav-link text-primary">
@@ -139,12 +132,15 @@ try {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={"/"} onClick={handleLogout} className="nav-link text-primary">
+                  <Link
+                    to={"/"}
+                    onClick={handleLogout}
+                    className="nav-link text-primary"
+                  >
                     <FontAwesomeIcon icon={faSignOutAlt} className="mr-1" />
                     Logout
                   </Link>
                 </li>
-                
               </ul>
             </div>
           </div>
