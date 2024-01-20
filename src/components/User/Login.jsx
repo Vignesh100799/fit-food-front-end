@@ -1,17 +1,21 @@
-import { ErrorMessage, useFormik } from "formik";
+import { useFormik } from "formik";
 import React, { useState } from "react";
-
 import { containerStyle, formContainerStyle } from "./style";
-
 import { Link, useNavigate } from "react-router-dom";
 import { loginInitialValue, loginValidation } from "../Formik/formik";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginSuccess } from "../reducers/Slice/userSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const [showpassword, setShowpassword] = useState(false);
 
+  const handleShow = () => {
+    setShowpassword(!showpassword);
+  };
   const navigate = useNavigate();
   const [apiError, setApiError] = useState(null);
   const formik = useFormik({
@@ -68,18 +72,31 @@ const Login = () => {
               <label htmlFor="password" className="form-label">
                 Password
               </label>
-              <input
-                type="password"
-                className={`form-control ${
-                  formik.touched.password && formik.errors.password
-                    ? "is-invalid"
-                    : ""
-                }`}
-                id="password"
-                name="password"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
+              <div className="input-group">
+                <input
+                  type={showpassword ? "text" : "password"}
+                  className={`form-control ${
+                    formik.touched.password && formik.errors.password
+                      ? "is-invalid"
+                      : ""
+                  }`}
+                  id="password"
+                  name="password"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                <button
+                  className="btn btn-outline-secondary"
+                  type="button"
+                  onClick={handleShow}
+                >
+                  {" "}
+                  <FontAwesomeIcon
+                    icon={showpassword ? faEyeSlash : faEye}
+                    size="sm"
+                  />
+                </button>
+              </div>
               {formik.touched.password && formik.errors.password ? (
                 <div className="invalid-feedback">{formik.errors.password}</div>
               ) : null}

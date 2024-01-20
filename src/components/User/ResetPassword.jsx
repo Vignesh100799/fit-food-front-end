@@ -1,14 +1,21 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 
 import { containerStyle, formContainerStyle } from "./style";
 import { Link, json, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const ResetPassword = () => {
-    const navigate = useNavigate()
-    const params = useParams()
+  const [showpassword, setShowpassword] = useState(false);
+
+  const handleShow = () => {
+    setShowpassword(!showpassword);
+  };
+  const navigate = useNavigate();
+  const params = useParams();
   const formik = useFormik({
     initialValues: {
       password: "",
@@ -27,17 +34,15 @@ const ResetPassword = () => {
         .required("Confirm New Password is required"),
     }),
     onSubmit: async (values) => {
-    try {
-      await axios.post(`/api/reset-password/${params.token}`,values)
-      // console.log(values)
-     
-      formik.resetForm();
-      navigate("/login")
-    } catch (error) {
-      console.log(error)
-    }
-     
-      
+      try {
+        await axios.post(`/api/reset-password/${params.token}`, values);
+        // console.log(values)
+
+        formik.resetForm();
+        navigate("/login");
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
   return (
@@ -57,21 +62,33 @@ const ResetPassword = () => {
               <label htmlFor="password" className="form-label">
                 New Password
               </label>
-              <input
-                type="password"
-                className={`form-control ${
-                  formik.touched.password && formik.errors.password
-                    ? "is-invalid"
-                    : ""
-                }`}
-                id="password"
-                name="password"
-                {...formik.getFieldProps("password")}
-              />
+              <div className="input-group">
+                <input
+                  type={showpassword ? "text" : "password"}
+                  className={`form-control ${
+                    formik.touched.password && formik.errors.password
+                      ? "is-invalid"
+                      : ""
+                  }`}
+                  id="password"
+                  name="password"
+                  {...formik.getFieldProps("password")}
+                />
+                <button
+                  className="btn btn-outline-secondary"
+                  type="button"
+                  onClick={handleShow}
+                >
+                  {" "}
+                  <FontAwesomeIcon
+                    icon={showpassword ? faEyeSlash : faEye}
+                    size="sm"
+                  />
+                </button>
+              </div>
+
               {formik.touched.password && formik.errors.password ? (
-                <div className="invalid-feedback">
-                  {formik.errors.password}
-                </div>
+                <div className="invalid-feedback">{formik.errors.password}</div>
               ) : null}
             </div>
 
@@ -79,18 +96,31 @@ const ResetPassword = () => {
               <label htmlFor="confirmPassword" className="form-label">
                 Confirm New Password
               </label>
-              <input
-                type="password"
-                className={`form-control ${
-                  formik.touched.confirmPassword &&
-                  formik.errors.confirmPassword
-                    ? "is-invalid"
-                    : ""
-                }`}
-                id="confirmPassword"
-                name="confirmPassword"
-                {...formik.getFieldProps("confirmPassword")}
-              />
+              <div className="input-group">
+                <input
+                  type={showpassword ? "text" : "password"}
+                  className={`form-control ${
+                    formik.touched.confirmPassword &&
+                    formik.errors.confirmPassword
+                      ? "is-invalid"
+                      : ""
+                  }`}
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  {...formik.getFieldProps("confirmPassword")}
+                />
+                <button
+                  className="btn btn-outline-secondary"
+                  type="button"
+                  onClick={handleShow}
+                >
+                  {" "}
+                  <FontAwesomeIcon
+                    icon={showpassword ? faEyeSlash : faEye}
+                    size="sm"
+                  />
+                </button>
+              </div>
               {formik.touched.confirmPassword &&
               formik.errors.confirmPassword ? (
                 <div className="invalid-feedback">
