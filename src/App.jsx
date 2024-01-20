@@ -4,8 +4,7 @@ import Login from "./components/User/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LandingPage from "./components/Landingpage/LandingPage";
-
-import "bootstrap";
+import 'bootstrap';
 import ForgotPassword from "./components/User/ForgotPassword";
 import ResetPassword from "./components/User/ResetPassword";
 import RegisterForm from "./components/User/info/Regis";
