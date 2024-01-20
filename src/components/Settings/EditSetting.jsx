@@ -69,6 +69,7 @@ const EditSetting = ({ onCancelEdit, setEditing }) => {
     kidneyDisease: ["Chronic Kidney Disease (CKD)"],
     respiratoryConditions: ["Sleep Apnea"],
     mentalHealthConditions: ["Depression"],
+    None : ["None"]
   });
   const handleHealthConditionCategoryChange = (category) => {
     formik.setFieldValue("healthConditionCategory", category);
