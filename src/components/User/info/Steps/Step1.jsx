@@ -75,7 +75,7 @@ const Step1 = ({ formik }) => {
           </div>
           <div className="mb-3">
             <label htmlFor="activationLevel" className="form-label">
-              Activation Level:
+              Activity Level:
             </label>
             <select
               id="activationLevel"
