@@ -7,12 +7,13 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../reducers/Slice/userSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash, faL } from "@fortawesome/free-solid-svg-icons";
+import Loading from "../Dashboard/assests/Loading";
 
 const Login = () => {
   const dispatch = useDispatch();
   const [showpassword, setShowpassword] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const handleShow = () => {
     setShowpassword(!showpassword);
   };
@@ -23,13 +24,16 @@ const Login = () => {
     validationSchema: loginValidation,
     onSubmit: async (values) => {
       try {
+        setLoading(true);
         const response = await axios.post(`/api/login`, values);
         if (response.status === 200) {
           dispatch(loginSuccess(response.data));
           formik.resetForm();
           navigate("/dashboard");
+          setLoading(false);
         }
       } catch (error) {
+        setLoading(false);
         setApiError(error.response.data.message);
       }
     },
@@ -106,10 +110,16 @@ const Login = () => {
                 </p>
               )}
             </div>
+            {loading ? (
+              <button type="submit" className="btn w-100 mt-3">
+                <Loading />
+              </button>
+            ) : (
+              <button type="submit" className="btn btn-primary w-100 mt-3">
+                Login
+              </button>
+            )}
 
-            <button type="submit" className="btn btn-primary w-100 mt-3">
-              Login
-            </button>
             <p className="mt-3 text-center">
               Not yet registered?
               <Link to="/register" className="text-decoration-none ms-2">

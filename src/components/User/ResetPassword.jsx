@@ -7,15 +7,17 @@ import { Link, json, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import Loading from "../Dashboard/assests/Loading";
 
 const ResetPassword = () => {
   const [showpassword, setShowpassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleShow = () => {
     setShowpassword(!showpassword);
   };
   const navigate = useNavigate();
-  const params = useParams();
+  const params = useParams();   
   const formik = useFormik({
     initialValues: {
       password: "",
@@ -35,12 +37,15 @@ const ResetPassword = () => {
     }),
     onSubmit: async (values) => {
       try {
+        setLoading(true);
         await axios.post(`/api/reset-password/${params.token}`, values);
-        // console.log(values)
 
         formik.resetForm();
         navigate("/login");
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
+
         console.log(error);
       }
     },
@@ -129,9 +134,15 @@ const ResetPassword = () => {
               ) : null}
             </div>
 
-            <button type="submit" className="btn btn-primary w-100 mt-3">
-              Reset Password
-            </button>
+            {loading ? (
+              <button type="submit" className="btn w-100 mt-3">
+                <Loading />
+              </button>
+            ) : (
+              <button type="submit" className="btn btn-primary w-100 mt-3">
+                Reset Password
+              </button>
+            )}
             <p className="mt-3 text-center">
               Remember your password?{" "}
               <Link to="/login" className="text-decoration-none ms-2">

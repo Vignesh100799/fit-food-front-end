@@ -5,9 +5,11 @@ import * as Yup from "yup";
 import { containerStyle, formContainerStyle } from "./style";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Loading from "../Dashboard/assests/Loading";
 
 const ForgotPassword = () => {
   const [apiError, setApiError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -20,11 +22,14 @@ const ForgotPassword = () => {
     }),
     onSubmit: async (values) => {
       try {
-        // console.log("Sending reset link to:", values.email);
+        setLoading(true);
+
     const response = await axios.post(`/api/forgot-password`, values);
         formik.resetForm();
-        console.log(response)
+        setLoading(false);
+
       } catch (error) {
+        setLoading(false);
         setApiError(error.response.data.message);
       }
     },
@@ -67,9 +72,15 @@ const ForgotPassword = () => {
               )}
             </div>
 
-            <button type="submit" className="btn btn-primary w-100 mt-3">
-              Send Reset Link
-            </button>
+            {loading ? (
+              <button type="submit" className="btn w-100 mt-3">
+                <Loading />
+              </button>
+            ) : (
+              <button type="submit" className="btn btn-primary w-100 mt-3">
+                Send reset link
+              </button>
+            )}
             <p className="mt-3 text-center">
               Remember your password?{" "}
               <Link to="/login" className="text-decoration-none ms-2">
