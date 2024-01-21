@@ -140,18 +140,15 @@ export const validationSchema = Yup.object({
             .when("unit", {
                 is: "lbs",
                 then: Yup.number().min(88, "Weight must be at least 88 lbs"),
-            }),
-        unit: Yup.string()
-            .required("Unit is required"),
+            })
+      
     }),
     height: Yup.object().shape({
         value: Yup.number()
             .required("Height is required")
             .min(54.6, "Height must be greater than or equal to the world's lowest person (54.6 cm)")
-            .max(272, "Height must be less than or equal to the world's highest person (272 cm)"),
-        unit: Yup.string()
-            .required("Unit is required")
-            .oneOf(["cm"], "Invalid unit"),
+            .max(272, "Height must be less than or equal to the world's highest person (272 cm)")
+    
     }),
     healthConditionCategory: Yup.string().required(
         "Health condition category is required"

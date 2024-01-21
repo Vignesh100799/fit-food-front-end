@@ -17,7 +17,6 @@ import Step1 from "./Steps/Step1";
 import Step2 from "./Steps/Step2";
 import axios from "axios";
 
-
 const RegisterForm = () => {
   const steps = [
     "Account Information",
@@ -26,18 +25,22 @@ const RegisterForm = () => {
   ];
   const [activeStep, setActiveStep] = useState(0);
   const [showThankYou, setShowThankYou] = useState(false);
+  const [apiError, setApiError] = useState(null);
 
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: validationSchema,
+    validateOnChange: true,
     onSubmit: async (value) => {
       try {
-        await axios.post(`/api/register`, value);
-        // console.log(value)
-        formik.resetForm();
-        setShowThankYou(true);
+        const response = await axios.post(`/api/register`, value);
+        if (response.status === 200) {
+          // console.log(value)
+          formik.resetForm();
+          setShowThankYou(true);
+        }
       } catch (error) {
-        console.log(error);
+        setApiError(error.response.data.message);
       }
     },
   });
@@ -80,7 +83,53 @@ const RegisterForm = () => {
     </div>
   );
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
+    formik.validateForm().then((errors) => {
+      if (activeStep === 0) {
+        const firstStepFields = [
+          "username",
+          "gender",
+          "age",
+          "activationLevel",
+        ];
+
+        const hasErrors = firstStepFields.some((field) => errors[field]);
+
+        if (hasErrors) {
+          return;
+        }
+      } else if (activeStep === 1) {
+        const secondStepFields = [
+          "goals",
+          "food",
+          "weight.value",
+          "height.value",
+          "healthConditionCategory",
+          "healthCondition",
+        ];
+
+        const hasErrors = secondStepFields.some((field) => errors[field]);
+
+        if (hasErrors) {
+          return;
+        }
+      } else if (activeStep === 2) {
+        const thirdStepFields = [
+          "firstName",
+          "lastName",
+          "email",
+          "password",
+          "confirmPassword",
+        ];
+
+        const hasErrors = thirdStepFields.some((field) => errors[field]);
+
+        if (hasErrors) {
+          return;
+        }
+      }
+
+      setActiveStep(activeStep + 1);
+    });
   };
   const handleBack = () => {
     setActiveStep((prevActiveStep) => Math.max(0, prevActiveStep - 1));
@@ -113,13 +162,17 @@ const RegisterForm = () => {
                       Finish
                     </Button>
                   ) : (
-                    <button
-                      type="submit"
-                      className="btn btn-primary"
-                      onClick={handleNext}
-                    >
+                    <div className="btn btn-primary" onClick={handleNext}>
                       Next
-                    </button>
+                    </div>
+                  )}
+                  {apiError && (
+                    <p
+                      className="alert alert-danger mt-3 text-center"
+                      role="alert"
+                    >
+                      {apiError}
+                    </p>
                   )}
                   {activeStep !== 0 && (
                     <Button onClick={handleBack}>Back</Button>

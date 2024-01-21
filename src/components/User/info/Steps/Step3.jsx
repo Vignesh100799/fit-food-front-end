@@ -79,66 +79,70 @@ const Step3 = ({ formik }) => {
               Password
             </label>
             <div className="input-group">
-            <input
-              type={showpassword ? "text" : "password"}
-              className={`form-control ${
-                formik.touched.password && formik.errors.password
-                  ? "is-invalid"
-                  : ""
-              }`}
-              id="password"
-              name="password"
-              {...formik.getFieldProps("password")}
-            />
-            <button
-              className="btn btn-outline-secondary"
-              type="button"
-              onClick={handleShow}
-            >
-              {" "}
-              <FontAwesomeIcon
-                icon={showpassword ? faEyeSlash : faEye}
-                size="sm"
+              <input
+                type={showpassword ? "text" : "password"}
+                className={`form-control ${
+                  formik.touched.password && formik.errors.password
+                    ? "is-invalid"
+                    : ""
+                }`}
+                id="password"
+                name="password"
+                {...formik.getFieldProps("password")}
               />
-            </button></div>
-            {formik.touched.password && formik.errors.password ? (
-              <div className="invalid-feedback">{formik.errors.password}</div>
-            ) : null}
+              <button
+                className="btn btn-outline-secondary"
+                type="button"
+                onClick={handleShow}
+              >
+                {" "}
+                <FontAwesomeIcon
+                  icon={showpassword ? faEyeSlash : faEye}
+                  size="sm"
+                />
+              </button>
+
+              {formik.touched.password && formik.errors.password ? (
+                <div className="invalid-feedback">{formik.errors.password}</div>
+              ) : null}
+            </div>
           </div>
           <div className="mb-3">
             <label htmlFor="confirmPassword" className="form-label">
               Confirm Password
             </label>
             <div className="input-group">
-            <input
-              type={showpassword ? "text" : "password"}
-              className={`form-control ${
-                formik.touched.confirmPassword && formik.errors.confirmPassword
-                  ? "is-invalid"
-                  : ""
-              }`}
-              id="confirmPassword"
-              name="confirmPassword"
-              {...formik.getFieldProps("confirmPassword")}
-            />
-             <button
-              className="btn btn-outline-secondary"
-              type="button"
-              onClick={handleShow}
-            >
-              {" "}
-              <FontAwesomeIcon
-                icon={showpassword ? faEyeSlash : faEye}
-                size="sm"
+              <input
+                type={showpassword ? "text" : "password"}
+                className={`form-control ${
+                  formik.touched.confirmPassword &&
+                  formik.errors.confirmPassword
+                    ? "is-invalid"
+                    : ""
+                }`}
+                id="confirmPassword"
+                name="confirmPassword"
+                {...formik.getFieldProps("confirmPassword")}
               />
-            </button>
+              <button
+                className="btn btn-outline-secondary"
+                type="button"
+                onClick={handleShow}
+              >
+                {" "}
+                <FontAwesomeIcon
+                  icon={showpassword ? faEyeSlash : faEye}
+                  size="sm"
+                />
+              </button>
 
+              {formik.touched.confirmPassword &&
+              formik.errors.confirmPassword ? (
+                <div className="invalid-feedback">
+                  {formik.errors.confirmPassword}
+                </div>
+              ) : null}
             </div>
-            {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-              <div className="invalid-feedback">
-                {formik.errors.confirmPassword}
-              </div>
-            ) : null}
           </div>
 
           <p className="mt-3 text-center">

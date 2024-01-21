@@ -34,9 +34,9 @@ const Step2 = ({ formik }) => {
               <option value="gainWeight" label="Gain Weight" />
               <option value="maintainWeight" label="Maintain Weight" />
             </select>
-            {formik.touched.goals && formik.errors.goals && (
+            {formik.touched.goals && formik.errors.goals ? (
               <div className="invalid-feedback">{formik.errors.goals}</div>
-            )}
+            ) : null }
           </div>
           <div>
             <label htmlFor="food" className="form-label">
@@ -56,9 +56,9 @@ const Step2 = ({ formik }) => {
               <option value="veg" label="Vegetarian" />
               <option value="nonVeg" label="Non Vegetarian" />
             </select>
-            {formik.touched.food && formik.errors.food && (
+            {formik.touched.food && formik.errors.food ? (
               <div className="invalid-feedback">{formik.errors.food}</div>
-            )}
+            ): null }
           </div>
           <div>
             <label htmlFor="weight.value" className="form-label">
@@ -79,12 +79,12 @@ const Step2 = ({ formik }) => {
                 value={formik.values.weight.value}
               />
               <span className="input-group-text">kg</span>
-            </div>
-            {formik.touched.weight?.value && formik.errors.weight?.value && (
+            {formik.touched.weight?.value && formik.errors.weight?.value ? (
               <div className="invalid-feedback">
                 {formik.errors.weight.value}
               </div>
-            )}
+            ): null }
+            </div>
           </div>
 
           <div>
@@ -106,14 +106,14 @@ const Step2 = ({ formik }) => {
                 value={formik.values.height.value}
               />
               <span className="input-group-text">cm</span>
-            </div>
-            {formik.touched.height?.value && formik.errors.height?.value && (
+            {formik.touched.height?.value && formik.errors.height?.value ? (
               <div className="invalid-feedback">
                 <span className="d-inline-block">
                   {formik.errors.height.value}
                 </span>
               </div>
-            )}
+            ): null }
+            </div>
           </div>
 
           <div>
@@ -141,11 +141,11 @@ const Step2 = ({ formik }) => {
               ))}
             </select>
             {formik.touched.healthConditionCategory &&
-              formik.errors.healthConditionCategory && (
+              formik.errors.healthConditionCategory ? (
                 <div className="invalid-feedback">
                   {formik.errors.healthConditionCategory}
                 </div>
-              )}
+              ): null }
           </div>
 
           {/* Health Condition Select */}
@@ -178,11 +178,11 @@ const Step2 = ({ formik }) => {
                 )}
             </select>
             {formik.touched.healthCondition &&
-              formik.errors.healthCondition && (
+              formik.errors.healthCondition ? (
                 <div className="invalid-feedback">
                   {formik.errors.healthCondition}
                 </div>
-              )}
+              ): null }
           </div>
         </div>
       </div>
