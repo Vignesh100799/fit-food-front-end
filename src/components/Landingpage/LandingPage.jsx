@@ -4,6 +4,7 @@ import Pricecard from "./Pricecard/Pricecard";
 import Reviews from "./Reviews/Reviews";
 import Footer from "./Footer"
 import Tracker from "./Tracking/Tracker";
+import Faq from "./Faq";
 
 const LandingPage = () => {
   return (
@@ -12,6 +13,7 @@ const LandingPage = () => {
       <Tracker/>
       <Reviews/>
       <Pricecard/>
+      <Faq/>
       <Footer/>
     </>
   );
