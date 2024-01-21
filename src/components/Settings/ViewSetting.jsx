@@ -27,7 +27,7 @@ const ViewSetting = ({ onEditClick }) => {
                 <td>{user.age}</td>
               </tr>
               <tr>
-                <td>Activation Level</td>
+                <td>Activity Level</td>
                 <td>{user.activationLevel}</td>
               </tr>
               <tr>

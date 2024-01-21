@@ -154,7 +154,7 @@ const EditSetting = ({ onCancelEdit, setEditing }) => {
                 </td>
               </tr>
               <tr>
-                <td>Activation Level</td>
+                <td>Activity Level</td>
                 <td>
                   <select
                     id="activationLevel"
