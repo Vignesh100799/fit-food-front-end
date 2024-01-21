@@ -33,7 +33,7 @@ const Side = ({ children }) => {
     <div className="wrapper d-flex align-items-stretch light-mode">
       <nav id="sidebar" className={isSidebarActive ? "active " : ""}>
         <Link>
-          <h3 className="text-white mt-3 text-center">Fit Food</h3>
+          <h3 className="text-white mt-3 text-center">{isSidebarActive ? 'FF' : 'Fit Food'}</h3>
         </Link>
         <ul className="list-unstyled components mb-5">
           <li className="active">
@@ -115,7 +115,6 @@ const Side = ({ children }) => {
               aria-label="Toggle navigation"
             >
               <i className="fa fa-bars m-2" />
-              {/* <span className="navbar-toggler-icon"></span> */}
             </button>
 
             <div
