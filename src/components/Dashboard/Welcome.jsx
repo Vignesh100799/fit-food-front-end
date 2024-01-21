@@ -8,7 +8,7 @@ const Welcome = () => {
 
     if (currentHour >= 5 && currentHour < 12) {
       return { greeting: "Good Morning", icon: faSun };
-    } else if (currentHour >= 12 && currentHour < 18) {
+    } else if (currentHour >= 12 && currentHour < 15) {
       return { greeting: "Good Afternoon", icon: faCoffee };
     } else {
       return { greeting: "Good Evening", icon: faMoon };
