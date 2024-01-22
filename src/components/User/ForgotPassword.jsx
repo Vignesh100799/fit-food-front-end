@@ -9,8 +9,8 @@ import Loading from "../Dashboard/assests/Loading";
 
 const ForgotPassword = () => {
   const [apiError, setApiError] = useState(null);
+  const [apiSuccess,setApiSuccess] = useState(null)
   const [loading, setLoading] = useState(false);
-
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -27,6 +27,7 @@ const ForgotPassword = () => {
     const response = await axios.post(`/api/forgot-password`, values);
         formik.resetForm();
         setLoading(false);
+        setApiSuccess(response.data.message)
 
       } catch (error) {
         setLoading(false);
@@ -68,6 +69,11 @@ const ForgotPassword = () => {
               {apiError && (
                 <p className="alert alert-danger mt-3 text-center" role="alert">
                   {apiError}
+                </p>
+              )}
+                {apiSuccess && (
+                <p className="alert alert-success mt-3 text-center" role="success">
+                  {apiSuccess}
                 </p>
               )}
             </div>
