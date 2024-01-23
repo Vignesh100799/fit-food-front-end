@@ -35,12 +35,12 @@ const EditSetting = ({ onCancelEdit, setEditing }) => {
     validationSchema: settingsValidation,
     onSubmit: async (values) => {
       try {
-        console.log(values);
+        // console.log(values);
         const response = await axios.patch(
           `/api/updateSetting/${user._id}`,
           values
         );
-        console.log(response);
+        // console.log(response);
         dispatch(updateSuccess(response.data));
         setEditing(false);
         onCancelEdit();

@@ -151,7 +151,9 @@ export const vegTips = {
         },
         "tuesday": {
             "breakfast": ["Chia seed pudding with coconut milk", "Mixed berries", "Herbal tea"],
-            "lunch": ["Grilled salmon with quinoa", "Roasted Brussels sprouts", "Grapefruit segments"]
+            "lunch": ["Grilled salmon with quinoa", "Roasted Brussels sprouts", "Grapefruit segments"],
+            "snack": ["Cucumber slices with tzatziki sauce", "Handful of almonds"],
+            "dinner": ["Vegetarian stir-fry with tofu and broccoli", "Brown rice", "Orange segments"]
         },
         "wednesday": {
             "breakfast": ["Pancakes with maple syrup", "Mixed berries", "Glass of whole milk"],

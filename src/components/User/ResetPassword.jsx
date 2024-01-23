@@ -12,6 +12,7 @@ import Loading from "../Dashboard/assests/Loading";
 const ResetPassword = () => {
   const [showpassword, setShowpassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [apiSuccess,setApiSuccess] = useState(null)
 
   const handleShow = () => {
     setShowpassword(!showpassword);
@@ -38,11 +39,11 @@ const ResetPassword = () => {
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        await axios.post(`/api/reset-password/${params.token}`, values);
-
+        const res = await axios.post(`/api/reset-password/${params.token}`, values);
         formik.resetForm();
         navigate("/login");
         setLoading(false);
+        setApiSuccess(res.data.message)
       } catch (error) {
         setLoading(false);
 
@@ -132,6 +133,11 @@ const ResetPassword = () => {
                   {formik.errors.confirmPassword}
                 </div>
               ) : null}
+              {apiSuccess && (
+                <p className="alert alert-success mt-3 text-center" role="success">
+                  {apiSuccess}
+                </p>
+              )}
             </div>
 
             {loading ? (
