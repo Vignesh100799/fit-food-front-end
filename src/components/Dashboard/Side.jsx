@@ -30,12 +30,12 @@ const Side = ({ children }) => {
   };
 
   return (
-    <div className="wrapper d-flex align-items-stretch light-mode">
+    <div className="wrapper d-flex align-items-stretch bg-secondary-subtle">
       <nav id="sidebar" className={isSidebarActive ? "active " : ""}>
         <Link>
           <h3 className="text-white mt-3 text-center">{isSidebarActive ? 'FF' : 'Fit Food'}</h3>
         </Link>
-        <ul className="list-unstyled components mb-5">
+        <ul className="list-unstyled components mb-5 ">
           <li className="active">
             <Link className="text-decoration-none" to={"/dashboard"}>
               <span className="fa fa-home" />

@@ -94,13 +94,11 @@ const Login = () => {
                   type="button"
                   onClick={handleShow}
                 >
-                  {" "}
                   <FontAwesomeIcon
                     icon={showpassword ? faEyeSlash : faEye}
                     size="sm"
                   />
                 </button>
-              </div>
               {formik.touched.password && formik.errors.password ? (
                 <div className="invalid-feedback">{formik.errors.password}</div>
               ) : null}
@@ -109,6 +107,7 @@ const Login = () => {
                   {apiError}
                 </p>
               )}
+              </div>
             </div>
             {loading ? (
               <button type="submit" className="btn w-100 mt-3">
