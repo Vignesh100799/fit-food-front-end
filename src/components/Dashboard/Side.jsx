@@ -30,7 +30,7 @@ const Side = ({ children }) => {
   };
 
   return (
-    <div className="wrapper d-flex align-items-stretch bg-secondary-subtle">
+    <div className="wrapper d-flex align-items-stretch ">
       <nav id="sidebar" className={isSidebarActive ? "active " : ""}>
         <Link>
           <h3 className="text-white mt-3 text-center">{isSidebarActive ? 'FF' : 'Fit Food'}</h3>
